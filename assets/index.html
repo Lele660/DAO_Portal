@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+
+<body>
+    <div id="content_container">
+        <div id="form_container">
+            <div id="form_header_container">
+                <h2 id="form_header"> Register </h2>
+            </div>
+
+            <div id="form_content_container">
+                <div id="form_content_inner_container">
+                    <input type="first name" id="first_name" placeholder="First name">
+                    <input type="last name" id="last_name" placeholder="Last name">
+                    <input type="email" id="email" placeholder="UCSD Email">
+                    <input type="password" id="password" placeholder="Password">
+                    <!--input type="password" id="confirm_password" placeholder="Confirm password"-->
+
+                    <div id="button_container">
+                        <button class="Submit" id='signUp'>Sign up</button>
+                        <a href="index.html"><button type='submit' class='btn'>Login</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+    //import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyDYepSXxpwdIDnC6iZU2_ADkPf_WtB_f00",
+        authDomain: "dao-portal-64884.firebaseapp.com",
+        databaseURL: "https://dao-portal-64884-default-rtdb.firebaseio.com",
+        projectId: "dao-portal-64884",
+        storageBucket: "dao-portal-64884.appspot.com",
+        messagingSenderId: "852120286878",
+        appId: "1:852120286878:web:0b5c1a029c3a5a7460ad8f",
+        measurementId: "G-MH464YG63V"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    signUp.addEventListener('click', (e) => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+    // Signed in 
+        const user = userCredential.user;
+        // ...
+       })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    // ..
+  });
+    })
+
+    /*
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    */
+
+</script>
+
+
+</html>
