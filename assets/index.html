@@ -62,6 +62,11 @@
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     signUp.addEventListener('click', (e) => {
+        // make sure that only ucsd emails
+        if (!email.endsWith(`@ucsd.edu`)) {
+            alert('Invalid email');
+            return;
+        }
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
     
@@ -75,7 +80,6 @@
     
   });
     })
-
    
 
 </script>
