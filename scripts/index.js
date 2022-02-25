@@ -1,13 +1,19 @@
-//might have to put somewhere private
+// constants
+const pass_len = 9;
+
+//might have to put somewhere private, have to put this somewhere private tho
+// new database config
 const firebaseConfig = {
-    apiKey: "AIzaSyCmT2k7xuGVgSZyA_hlSoB-jSTeeVvKw6w",
-    authDomain: "dao-portal.firebaseapp.com",
-    projectId: "dao-portal",
-    storageBucket: "dao-portal.appspot.com",
-    messagingSenderId: "17033832538",
-    appId: "1:17033832538:web:6065b9627e98812ac8d063",
-    measurementId: "G-ZBZ26KTC95"
+    apiKey: "AIzaSyDYepSXxpwdIDnC6iZU2_ADkPf_WtB_f00",
+    authDomain: "dao-portal-64884.firebaseapp.com",
+    databaseURL: "https://dao-portal-64884-default-rtdb.firebaseio.com",
+    projectId: "dao-portal-64884",
+    storageBucket: "dao-portal-64884.appspot.com",
+    messagingSenderId: "852120286878",
+    appId: "1:852120286878:web:0b5c1a029c3a5a7460ad8f",
+    measurementId: "G-MH464YG63V"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // Initialize variables
@@ -21,6 +27,23 @@ function register() {
     password = document.getElementById("password").value;
     confirm_pass = document.getElementById("confirm_password").value;
     
+    // allows for registering with ucsd emails only
+    if (!email.endsWith(`@ucsd.edu`)) {
+        alert('Invalid email');
+        return;
+    }
+
+    // password meets required length
+    if (password.length < pass_len) {
+        alert('Password must be at least 9 characters');
+        return;
+    }
+    // password must match confirm password
+    if (password != confirm_pass) {
+        alert('Passwords must match!');
+        return;
+    }
+
     auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
         user_uuid = userCredential.user.uid;
